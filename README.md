@@ -280,7 +280,8 @@ The broader research community working on emotion recognition and multimodal lea
 │   ├── default.yaml                                                    # Default project settings
 │   ├── train.yaml                                                      # Training-specific configurations
 │   └── eval.yaml                                                       # Evaluation parameters
-├── requirements.txt                                                    # CPU-only Python dependencies
+├── requirements-base.txt                                               # Common dependencies for both CPU/GPU
+├── requirements-cpu.txt                                                # CPU-specific Python dependencies
 ├── requirements-cuda.txt                                               # GPU-specific Python dependencies (CUDA)
 ├── .gitignore                                                          # Git ignore patterns
 ├── Dockerfile                                                          # Container deployment instructions

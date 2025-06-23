@@ -64,7 +64,8 @@ list_of_filepaths = [
     "configs/train.yaml",  # Configuration for training
     "configs/eval.yaml",  # Configuration for evaluation
     
-    "requirements.txt",  # CPU-only Python dependencies
+    "requirements-base.txt",  # Common dependencies for both CPU/GPU
+    "requirements-cpu.txt",  # CPU-specific Python dependencies
     "requirements-cuda.txt",  # GPU-specific Python dependencies (CUDA)
     
     ".gitignore",  # Git ignore file
