@@ -13,6 +13,13 @@ list_of_filepaths = [
 
     f"src/{project_name}/__init__.py",  # Marks the src/{project_name} directory as a Python package
 
+    f"src/{project_name}/components/__init__.py",  # Marks the components directory as a Python package
+    f"src/{project_name}/components/data_ingestion.py",  # Data collection components
+    f"src/{project_name}/components/data_validation.py",  # Data validation components
+    f"src/{project_name}/components/data_transformation.py",  # Data transformation components
+    f"src/{project_name}/components/model_trainer.py",  # Model training components
+    f"src/{project_name}/components/model_evaluation.py",  # Model evaluation components
+
     f"src/{project_name}/data/dataset.py",  # Handles dataset loading and preprocessing
     f"src/{project_name}/data/transforms.py",  # Contains data transformation and augmentation utilities
 
@@ -42,6 +49,10 @@ list_of_filepaths = [
     f"src/{project_name}/pipeline/stage_04_model_trainer.py",  # Pipeline for model training
     f"src/{project_name}/pipeline/stage_05_model_evaluation.py",  # Pipeline for model evaluation
 
+    "scripts/install_system_deps.sh",  # System dependencies installation script
+    "scripts/download_models.sh",  # Pre-trained model downloads script
+    "scripts/setup_environment.sh",  # Complete environment setup script
+
     "logs/.gitkeep",  # Directory for storing logs
 
     "notebooks/.gitkeep",  # Directory for Jupyter notebooks used in experimentation
@@ -52,7 +63,10 @@ list_of_filepaths = [
     "configs/default.yaml",  # Default configuration settings
     "configs/train.yaml",  # Configuration for training
     "configs/eval.yaml",  # Configuration for evaluation
-    "requirements.txt",  # List of project dependencies
+    
+    "requirements.txt",  # CPU-only Python dependencies
+    "requirements-cuda.txt",  # GPU-specific Python dependencies (CUDA)
+    
     ".gitignore",  # Git ignore file
     "Dockerfile",  # Instructions for building a Docker image
     "main.py",  # Main entry point for the project

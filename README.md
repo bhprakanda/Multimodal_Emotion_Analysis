@@ -221,6 +221,13 @@ The broader research community working on emotion recognition and multimodal lea
 ├── src/                                                                # Source code
 │   └── EmotionAnalysis/                                                # Main project package
 │       ├── __init__.py                                                 # Package initialization
+│       ├── components/                                                 # Reusable modular components
+│       │   ├── __init__.py                                             # Components package initialization
+│       │   ├── data_ingestion.py                                       # Data collection components
+│       │   ├── data_validation.py                                      # Data validation components
+│       │   ├── data_transformation.py                                  # Data transformation components
+│       │   ├── model_trainer.py                                        # Model training components
+│       │   └── model_evaluation.py                                     # Model evaluation components
 │       ├── data/                                                       # Data handling modules
 │       │   ├── dataset.py                                              # Dataset loading and preprocessing
 │       │   └── transforms.py                                           # Data transformation utilities
@@ -250,6 +257,10 @@ The broader research community working on emotion recognition and multimodal lea
 │           ├── stage_03_data_transformation.py                         # Feature engineering
 │           ├── stage_04_model_trainer.py                               # Model training stage
 │           └── stage_05_model_evaluation.py                            # Model assessment stage
+├── scripts/                                                            # Setup and utility scripts
+│   ├── install_system_deps.sh                                          # System dependencies installation
+│   ├── download_models.sh                                              # Pre-trained model downloads
+│   └── setup_environment.sh                                            # Complete environment setup
 ├── docs/                                                               # Documentation directory
 │   ├── documents/                                                      # Architecture documentation files
 │   │   ├── complete_multimodal_pipeline.md                             # Complete multimodal pipeline documentation
@@ -269,7 +280,8 @@ The broader research community working on emotion recognition and multimodal lea
 │   ├── default.yaml                                                    # Default project settings
 │   ├── train.yaml                                                      # Training-specific configurations
 │   └── eval.yaml                                                       # Evaluation parameters
-├── requirements.txt                                                    # Python dependencies
+├── requirements.txt                                                    # CPU-only Python dependencies
+├── requirements-cuda.txt                                               # GPU-specific Python dependencies (CUDA)
 ├── .gitignore                                                          # Git ignore patterns
 ├── Dockerfile                                                          # Container deployment instructions
 ├── main.py                                                             # Primary application entry point
