@@ -1,0 +1,157 @@
+# Paths for loading raw input CSV files
+RAW_DATA:  
+  INPUT_DIR: "/kaggle/input"
+  WORKING_DIR: "/kaggle/working"
+  ORIGINAL:
+    TRAIN: "meld-emotion-recognition/MELD.Raw/train/train_sent_emo.csv"
+    DEV: "meld-emotion-recognition/MELD.Raw/dev_sent_emo.csv"
+    TEST: "meld-emotion-recognition/MELD.Raw/test/sent_emo.csv"
+
+
+# Paths to cleaned CSV files after preprocessing
+CLEANING:  
+  INPUT_PATHS:
+    DEV: "meld-emotion-recognition/JSON files/JSON files/Updated CSV/dev_sent_emo_cleaned.csv"
+    TEST: "meld-emotion-recognition/JSON files/JSON files/Updated CSV/test_sent_emo_cleaned.csv"
+    TRAIN: "meld-emotion-recognition/JSON files/JSON files/Updated CSV/train_sent_emo_cleaned.csv"
+  OUTPUT_DIR: "/kaggle/working/processed_data"
+
+
+ # Filenames for initial JSON exports
+INITIAL_JSON_FILES: 
+  MELD_DATA: "MELD_Data_Cleaned.json"
+  MELD_TEXTUAL_DATA: "MELD_Textual_Data_Cleaned.json"
+  MELD_VIDEO_DATA: "MELD_Video_Data.json"
+  MELD_AUDIO_VIDEO: "MELD_audio_data.json"
+  MELD_AUDIO_DATA_UPDATED: "MELD_audio_data_updated.json"
+
+
+# Output after removing corrupted entries
+REMOVED_CORRUPTED_DATA:  
+  INPUT_DIR: "/kaggle/input"
+  WORKING_DIR: "/kaggle/working"
+  CSV:
+    TRAIN_SENT_EMO_REMOVED: "train_sent_emo_removed.csv"
+    DEV_SENT_EMO_REMOVED: "dev_sent_emo_removed.csv"
+    TEST_SENT_EMO_REMOVED: "test_sent_emo_removed.csv"
+  JSON:
+    MELD_CORRUPTED_VIDEO_DATA: "MELD_corrupted_video_data.json"
+    MELD_CORRUPTED_AUDIO_DATA: "MELD_corrupted_audio_data.json"
+  CLEANED_OUTPUT:
+    CSV:
+      TRAIN_SENT_EMO_CLEANED: "train_sent_emo_cleaned.csv"
+      DEV_SENT_EMO_CLEANED: "dev_sent_emo_cleaned.csv"
+      TEST_SENT_EMO_CLEANED: "test_sent_emo_cleaned.csv"
+    UPDATE_JSON_FILES:
+      MELD_DATA_CLEANED: "MELD_Data_Cleaned.json"
+      MELD_TEXTUAL_DATA: "MELD_Textual_Data_Cleaned.json"
+      MELD_VIDEO_DATA_CLEANED: "MELD_Video_Data_Cleaned.json"
+      MELD_AUDIO_DATA_UPDATED_CLEANED: "MELD_Audio_Data_Updated.json"
+    MANAGING_SPECIAL_CHARACTER:
+      OUTPUT_CSV:
+        TRAIN_SENT_EMO_REMOVED: "train_sent_emo_removed.csv"
+        DEV_SENT_EMO_REMOVED: "dev_sent_emo_removed.csv"
+        TEST_SENT_EMO_REMOVED: "test_sent_emo_removed.csv"
+      STRUCTURED_JSON:
+        MELD_DATA_CLEANED_PROCESSED: "MELD_Data_Cleaned_Processed.json"
+        MELD_TEXTUAL_DATA_CLEANED_PROCESSED: "MELD_Textual_Data_Cleaned_Processed.json"
+
+
+# Final JSON paths after full processing
+FINAL_JSON:  
+  MELD_DATA: "/kaggle/working/MELD_Data_Cleaned_Processed.json"
+  MELD_TEXTUAL: "/kaggle/working/MELD_Textual_Data_Cleaned_Processed.json"
+  MELD_AUDIO: "/kaggle/working/MELD_Audio_Data_Updated_Cleaned.json"
+  MELD_VIDEO: "/kaggle/working/MELD_Video_Data_Cleaned.json"
+
+
+# Directory paths for video frame extraction
+VIDEO_PATHS:  
+  TRAIN: "/kaggle/input/meld-emotion-recognition/MELD.Raw/train/train_splits/"
+  DEV: "/kaggle/input/meld-emotion-recognition/MELD.Raw/dev/dev_splits_complete/"
+  TEST: "/kaggle/input/meld-emotion-recognition/MELD.Raw/test/output_repeated_splits_test/"
+
+
+# Input/output paths for audio processing
+AUDIO_PATHS:  
+  INPUT_DIR: "/kaggle/input"
+  WORKING_DIR: "/kaggle/working"
+  EXTRACTED_AUDIO_JSON: "MELD_audio_data.json"
+  EXTRACTED_AUDIO_DATASET: "MELD_audio_dataset"
+
+
+# JSON inputs required for model training/inference
+FINAL_JSON_FOR_MODEL:  
+  MELD_DATA_CLEANED_PROCESSED: "MELD_Data_Cleaned_Processed.json"
+  MELD_TEXTUAL_DATA_CLEANED_PROCESSED: "MELD_Textual_Data_Cleaned_Processed.json"
+  MELD_VIDEO_DATA_CLEANED: "MELD_Video_Data_Cleaned.json"
+  MELD_AUDIO_DATA_CLEANED: "MELD_Audio_Data_Cleaned.json"
+
+
+# Model configuration and tokenizer
+MODEL:  
+  CACHE_DIR: "/kaggle/working/models"
+  TOKENIZER_NAME: "roberta-base"
+
+
+# Output file for extracted text features
+TEXT_FEATURES:  
+  JSON: "Audio_Features_RoBERTa.json"
+
+
+# Output file for extracted audio features
+AUDIO_FEATURES:  
+  JSON: "Audio_Features_OpenSMILE.json"
+
+
+# Output file and settings for video features
+VIDEO_FEATURES:  
+  JSON: "Video_Features_SlowFast.json"
+  INPUT_JSON: "/kaggle/working/MELD_Video_Data_Cleaned.json"
+  OUTPUT_DIR: "/kaggle/working/preprocessed_frames"
+  CHECKPOINT: "/kaggle/working/extraction_checkpoint.json"
+  EMERGENCY_DIR: "/kaggle/working/emergency_backups"
+
+
+# Frame extraction settings and paths
+VIDEO_FRAMES:  
+  OUTPUT_DIR: "preprocessed_frames"
+  EMERGENCY_BACKUP_DIR: "emergency_backups"
+  EMERGENCY_CHECKPOINT: "checkpoint.json"
+  CHECKPOINT: "extraction_checkpoint.json"
+
+
+# Output for RGB frame conversion
+COLOR_SPACE_CONVERSION:  
+  OUTPUT_DIR: "meld_extracted_video_frames_rgb"
+
+
+# Combining features from all three modalities
+FEATURE_COMBINING:  
+  TEXT_FEATURES: "/kaggle/input/extracted-features/Textual_Features_RoBERTa.json"
+  AUDIO_FEATURES: "/kaggle/input/extracted-features/Audio_Features_OpenSMILE.json"
+  VIDEO_FEATURES: "/kaggle/input/extracted-features/Video_Features_SlowFast.json"
+  MELD_CLEANED: "/kaggle/input/meld-emotion-recognition/JSON files/JSON files/Final Format/MELD_Data_Cleaned_Processed.json"
+  OUTPUT_COMBINED: "Multimodal_Combined_Features.json"
+  OUTPUT_ENHANCED: "Enhanced_Combined_Features.json"
+
+
+# Model and checkpoint used for feature extraction
+FEATURE_EXTRACTION:  
+  CHECKPOINT_PATH: "/kaggle/input/meld-extracted-video-frames-rgb/extraction_checkpoint.json"
+  MODEL_REPO_ID: "prakanda/hatsu-meld-emotion-recognition-new"
+  MODEL_FILENAME: "best_model.pth"
+  OUTPUT_FILE: "Video_Features_SlowFast.json"
+
+
+# Dataset-level parameters and label indexing
+DATASET: 
+  MAX_SENTENCE_LENGTH: 30
+  LABEL_INDEX:
+    NEUTRAL: 0
+    SURPRISE: 1
+    FEAR: 2
+    SADNESS: 3
+    JOY: 4
+    DISGUST: 5
+    ANGER: 6

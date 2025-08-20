@@ -1,0 +1,36 @@
+PROJECT:
+  NAME: Emotion Recognition
+  ARTIFACTS_ROOT: artifacts
+
+PIPELINE:
+  INGESTION:
+    ENABLED: true
+    OUTPUT_DIR: artifacts/data_ingestion
+  VALIDATION:
+    ENABLED: true
+    OUTPUT_DIR: artifacts/data_validation
+  TRANSFORMATION:
+    ENABLED: true
+    OUTPUT_DIR: artifacts/data_transformation
+  TRAINING:
+    ENABLED: true
+    OUTPUT_DIR: artifacts/model_trainer
+  EVALUATION:
+    ENABLED: true
+    OUTPUT_DIR: artifacts/model_evaluation
+
+EXPERIMENT:
+  MODEL_TYPE: GNN  # Can be: GNN, BiLSTM, SlowFast
+  DESCRIPTION: "Graph-based emotion classification from multimodal features"
+
+LOGGING:
+  LEVEL: INFO
+  LOG_TO_FILE: true
+  LOG_FILE_PATH: logs/run.log
+
+VISUALIZATION:
+  THEME:
+    BACKGROUND_COLOR: "#2A2A2A"
+    TEXT_COLOR: "#FFFFFF"
+    LABEL_COLOR: "#D2B48C"
+    TITLE_COLOR: "#1abc9c"

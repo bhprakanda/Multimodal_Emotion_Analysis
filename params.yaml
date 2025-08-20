@@ -1,0 +1,171 @@
+# Training Arguments
+TRAINING_ARGUMENTS:
+  # RoBERTa Model Parameters
+  RoBERTa:
+    TRAINING:
+      BATCH_SIZE: 16
+
+
+  # GNN Model Parameters
+  GNN:
+    MODEL:
+      HIDDEN_DIM: 128
+      DROPOUT: 0.7
+      EDGE_DROPOUT: 0.2
+      NUM_SPEAKERS: null
+      OUTPUT_DIM: 7
+
+    OPTIMIZER:
+      LR: 5e-5
+      WEIGHT_DECAY: 1e-3
+
+    SCHEDULER:
+      WARMUP_EPOCHS: 3
+
+    TRAINING:
+      BATCH_SIZE: 16
+      ACCUMULATION_STEPS: 2
+      MAX_EPOCHS: 60
+      PATIENCE: 10
+
+    LOSS:
+      GAMMA_BASE: 3.0
+      SMOOTHING: 0.15
+      ALPHA: 0.8
+      BETA: 0.7
+      PENALTY_FACTOR: 4.0
+
+    DATA:
+      CLASS_COUNTS_GNN: 7
+      TRAIN_DATA: "/kaggle/input/extracted-features/Enhanced_Features_with_BiLSTM.json"
+      MODEL_SAVE_PATH: "best_emotion_gnn_seed{}.pth"
+
+    LABEL_MAP:
+      0: Neutral
+      1: Surprise
+      2: Fear
+      3: Sadness
+      4: Joy
+      5: Disgust
+      6: Anger
+
+
+  # BiLSTM Model Parameters
+  BiLSTM:
+    ARCHITECTURE:
+      NAME: "multimodal_bilstm"
+      MODALITY_DIMS: [768, 6373, 2304]
+      HIDDEN_SIZE: 128
+      NUM_LAYERS: 2
+      DROPOUT: 0.5
+      OUTPUT_SIZE: 7
+
+    TRAINING:
+      MAX_EPOCH: 100
+      BATCH_SIZE: 16
+      PATIENCE: 10
+      
+
+    OPTIMIZER:
+      LEARNING_RATE: 0.0005
+      WEIGHT_DECAY: 0.01
+
+    LOSS:
+      GAMMA_BASE: 2.0
+      SMOOTHING: 0.1
+      ALPHA: 0.8
+
+    DATA:
+      DATA_PATH: "/kaggle/input/extracted-features/Enhanced_Combined_Features.json"
+      OUTPUT_PATH: "Enhanced_Features_with_BiLSTM.json"
+      MODEL_SAVE_PATH: "best_model.pth"
+      MINORITY_CLASSES_BiLSTM: [2, 3, 5]
+      CLASS_COUNTS_BiLSTM: 7
+
+
+  # SlowFast Model Parameters
+  SlowFast:
+    MODEL:
+      NUM_FRAMES: 32
+      CROP_SIZE: [224, 224]
+      DATASET_MEAN: [0.45, 0.45, 0.45]
+      DATASET_STD: [0.225, 0.225, 0.225]
+
+    TRAINING:
+      SEED: 42
+      BATCH_SIZE: 16
+      MAX_EPOCHS: 100
+      MIN_EPOCHS: 25
+      NO_IMPROVEMENT_THRESHOLD: 0.005
+      PATIENCE: 10
+      CHECKPOINT_FREQUENCY: 1
+      LOG_SAMPLES_FREQ: 50
+
+    OPTIMIZER:
+      BASE_LR: 1e-5
+      MAX_LR: 1e-3
+      WEIGHT_DECAY: 1e-4
+
+    SCHEDULER:
+      ACCUMULATION_STEPS: 4
+      GRAD_CLIP: 1.0
+
+    DATA:
+      INPUT_DATA_PATH: "/kaggle/input/meld-extracted-video-frames-rgb/extraction_checkpoint.json"
+      CLASS_NAME: ["Neutral", "Surprise", "Fear", "Sadness", "Joy", "Disgust", "Anger"]
+      # NUM_CLASSES: 7
+      RESIZE_SIZE: [256, 256]
+
+
+# Evaluation Arguments
+EVALUATION_ARGUMENTS:  
+  GNN:
+    EVALUATION:
+      MINORITY_CLASSES: [2, 3, 5]
+      SEEDS: [42, 2023, 7, 123, 314]
+
+
+# Data Processing Arguments
+PROCESSING_ARGUMENTS:
+  # Feature Extraction Arguments
+  FEATURE_EXTRACTION_ARGUMENTS:
+    TOKENIZER_NAME: "roberta-base"
+    MODEL_NAME: "roberta-base"
+    PADDING_STRATEGY: "max_length"
+    BATCH_SIZE: 16
+    MAX_LENGTH: None
+    TRUNCATION: True
+    ADD_SPECIAL_TOKENS: True
+
+  # Configuration for text data cleaning process
+  DATA_CLEANING:  
+    ENCODING: "cp1252"
+
+  # Parameters for text feature extraction using tokenizer
+  TEXT_FEATURES:  
+    TOKENIZER_NAME: "roberta-base"
+    PADDING_STRATEGY: "max_length"
+    BATCH_SIZE: 16
+
+  # Settings for extracting audio features
+  AUDIO_FEATURES:  
+    FEATURE_SET: "ComParE_2016"
+    FEATURE_LEVEL: "Functionals"
+    DEVICE: "cpu"
+
+  # Configuration for processing video frames and extracting features
+  VIDEO_FEATURES:  
+    NUM_FRAMES: 32
+    CROP_SIZE: [224, 224]
+    FACE_CONFIDENCE: 0.6
+    SPEAKER_HISTORY: 30
+    SIMILARITY_THRESHOLD: 0.4
+    CENTRALITY_WEIGHT: 0.2
+    MIN_SPEAKING_FRAMES: 15
+    BBOX_EXPAND_RATIO: 0.7
+    TRACKING_QUALITY_THRESHOLD: 7.0
+    MAX_TRACKING_FAILURES: 5
+    MAX_RETRIES: 3
+    CHECKPOINT_BACKUPS: 2
+    FRAME_VALIDATION_THRESHOLD: 32
+    MAX_RUNTIME: 43200  # 12 hours
